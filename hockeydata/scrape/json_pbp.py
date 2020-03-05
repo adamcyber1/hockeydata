@@ -76,7 +76,7 @@ def parse_event(event) -> dict:
     return play
 
 def parse_json(game_json: dict) -> DataFrame:
-    columns = ['PERIOD', 'EVENT', 'GAME_SECONDS', 'EVENT_PLAYER_1_NAME', 'EVENT_PLAYER_1_ID', 'EVENT_PLAYER_2_NAME',
+    columns = ['PERIOD', 'EVENT_INDEX', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_NAME', 'EVENT_PLAYER_1_ID', 'EVENT_PLAYER_2_NAME',
                'EVENT_PLAYER_2_ID', 'EVENT_PLAYER_3_NAME', 'EVENT_PLAYER_3_ID', 'X_CORD', 'Y_CORD']
 
     events_to_ignore = ['PERIOD READY', 'PERIOD OFFICIAL', 'GAME READY', 'GAME OFFICIAL', 'GAME SCHEDULED']
@@ -84,9 +84,9 @@ def parse_json(game_json: dict) -> DataFrame:
     try:
         plays = game_json['liveData']['plays']['allPlays']
         events = [parse_event(play) for play in plays if play['result']['event'].upper() not in events_to_ignore]
-        sorted_events = sorted(events, key=itemgetter('EVENT'))
+        sorted_events = sorted(events, key=itemgetter('EVENT_INDEX'))
         return pd.DataFrame(sorted_events, columns=columns)
-    except Exception:
+    except Exception as e:
         return None
 
 def get_teams(game_id: str) -> dict:

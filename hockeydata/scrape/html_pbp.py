@@ -207,7 +207,7 @@ def parse_event(event, players, home, away) -> pd.Series:
     series['EVENT_ZONE'] = get_zone(event[5])
     series['EVENT_TEAM'] = get_event_team(event[5], event[4])
 
-    series['EVENT_PLAYER_1'] = get_event_player_1(event[5], event[4], series['EVENT_TEAM'], players)
+    series['EVENT_PLAYER_1'] = get_event_player_1(event[5], event[4], series.EVENT_TEAM, players)
     series['EVENT_PLAYER_2'] = get_event_player_2(event[5], event[4], players)
     series['EVENT_PLAYER_3'] = get_event_player_3(event[5], event[4], players)
 
@@ -224,9 +224,6 @@ def parse_event(event, players, home, away) -> pd.Series:
             series['HOME_ON_{}'.format(i)] = player.get('id')
 
     return series
-
-def get_player_id(input: str) -> str:
-    pass
 
 def get_event_team(event_description: str, event_type: str) -> str:
     """
@@ -290,20 +287,46 @@ def valid_event(event: list):
     return event[0] != '#' and event[4] not in ['GOFF', 'EGT', 'PGSTR', 'PGEND', 'ANTHEM']
 
 
+def get_player_id(jersey: tuple, players: dict) -> str:
+    """
+    Basically takes a players jersey - a.k.a his team, name, and number, and gets his player ID
+
+    :param jersey: tuple of info
+    :param players:
+    :return:
+    """
+    for _, venue in players.items():
+        for _, player in venue.items():
+            if (player['number'] == jersey[1] or jersey[1] == '') and \
+                (player['team'] == jersey[0] or jersey[0] == '') and \
+                (player['last_name'].upper() == jersey[2] or  jersey[2] == ''):
+                return player['id']
+
+
+
+    print(jersey)
+
+
+
+    pass
+
+
 def get_event_player_1(event: str, event_type: str, event_team: str, players) -> str:
     try:
         if event_type in ['GOAL', 'HIT', 'MISS', 'BLOCK', 'FAC']:
-            pattern = re.compile("([A-Z]+\.[A-Z]+|[A-Z]+\s*#[0-9]+)")
+            pattern = re.compile("([A-Z\.]{0,3})\s*#\s*([0-9]{0,2})\s*([A-Z.]*)")
             res = re.findall(pattern, event)
-            return res[0]
+            return get_player_id(res[0], players)
         elif event_type in ['SHOT', 'GIVE', 'TAKE']:
             replace = re.compile('ONGOAL\s*-\s*|GIVEAWAY\s*-\s*|TAKEAWAY\s*-\s*')
             event = re.sub(replace, '', event)
-            pattern = re.compile('([A-Z]+\.[A-Z]+|[A-Z]+)\s*(#[0-9]+|[0-9]+)')
-            return re.findall(pattern, event)[0]
+            pattern = re.compile('([A-Z\.]{0,3})\s*#\s*([0-9]{0,2})\s*([A-Z.]*)')
+            res = re.findall(pattern, event)
+            return get_player_id(res[0], players)
         elif event_type == "PENL" and not "TEAM" in event:
-            pattern = re.compile('([A-Z]+\.[A-Z]+|[A-Z]+)\s*#[0-9]+')
-            return re.findall(pattern, event)[0]
+            pattern = re.compile("([A-Z\.]{0,3})\s*#\s*([0-9]{0,2})\s*([A-Z.]*)")
+            res = re.findall(pattern, event)
+            return get_player_id(res[0], players)
         elif event_type == "PENL" and "TEAM" in event and re.search('#[0-9]+', event):
             return event_team + re.findall('#[0-9]+', event)[0]
     except Exception:
@@ -314,13 +337,13 @@ def get_event_player_1(event: str, event_type: str, event_team: str, players) ->
 def get_event_player_2(event: str, event_type: str, players) -> str:
     try:
         if event_type in ['BLOCK', 'FAC', 'HIT', 'PENL'] and re.search('#[0-9]+', event):
-            pattern = re.compile('([A-Z]+\.[A-Z]+|[A-Z]+\s*#[0-9]+)')
+            pattern = re.compile('([A-Z\.]{0,3})\s*#\s*([0-9]{0,2})\s*([A-Z.]*)')
             res = re.findall(pattern, event)
-            return event[1]
-        elif event_type == 'GOAL' and re.search('#[0-9]+', event):
-            pattern = re.compile('#[0-9]+')
+            return get_player_id(res[1], players)
+        elif event_type == 'GOAL':
+            pattern = re.compile("([A-Z\.]{0,3})\s*#\s*([0-9]{0,2})\s*([A-Z.]*)")
             res = re.findall(pattern, event)
-            return event[1]
+            return get_player_id(res[1], players)
     except Exception:
         return None
 
@@ -329,21 +352,13 @@ def get_event_player_2(event: str, event_type: str, players) -> str:
 def get_event_player_3(event: str, event_type: str, players) -> str:
     try:
         if event_type == 'GOAL':
-            pattern = re.compile('#[0-9]+')
-            return re.findall(pattern, event)[2]
+            pattern = re.compile("([A-Z\.]{0,3})\s*#\s*([0-9]{0,2})\s*([A-Z.]*)")
+            res = re.findall(pattern, event)
+            return get_player_id(res[2], players)
     except Exception:
         return None
 
     return None
-
-
-def get_players(event_players, game_players):
-    ret = []
-    for player in event_players:
-        name = common.fix_name(player[0].upper())
-
-    return None
-
 
 def get_zone(event: str):
     try:

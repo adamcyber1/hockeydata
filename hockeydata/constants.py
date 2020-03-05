@@ -113,22 +113,17 @@ PART_TEAMS = {
 
 TEAM_IDS = {
     "N.J": 1, "NYI": 2, "NYR": 3, "PHI": 4, "PIT": 5, "BOS": 6, "BUF": 7, "MTL": 8, "OTT": 9, "TOR": 10, "ATL": 11, "CAR": 12, "FLA": 13, "T.B": 14,
-    "WSH": 15, "CHI": 16, "DET": 17, "NSH": 18, "STL": 19, "CGY": 20, "COL": 21, "EDM": 22, "VAN": 23, "ANA": 24, "DAL": 25, "L.A": 26, "ARI": 27, "S.J": 28,
+    "WSH": 15, "CHI": 16, "DET": 17, "NSH": 18, "STL": 19, "CGY": 20, "COL": 21, "EDM": 22, "VAN": 23, "ANA": 24, "DAL": 25, "L.A": 26, "S.J": 28,
     "CBJ": 29, "MIN": 30, "WPG": 52, "ARI": 53, "VGK": 54
 }
+# "ARI": 27, PHEONIX...
+
+TEAM_IDS_REVERSE = {1: 'N.J', 2: 'NYI', 3: 'NYR', 4: 'PHI', 5: 'PIT', 6: 'BOS', 7: 'BUF', 8: 'MTL', 9: 'OTT', 10: 'TOR',
+                    11: 'ATL', 12: 'CAR', 13: 'FLA', 14: 'T.B', 15: 'WSH', 16: 'CHI', 17: 'DET', 18: 'NSH', 19: 'STL',
+                    20: 'CGY', 21: 'COL', 22: 'EDM', 23: 'VAN', 24: 'ANA', 25: 'DAL', 26: 'L.A', 53: 'ARI', 28: 'S.J',
+                    29: 'CBJ', 30: 'MIN', 52: 'WPG', 54: 'VGK'}
 
 
-## ESPN's team IDs & event type codes
-"""
-ESPN_team_IDs =
-    "25", "24", "1", "2", "7", "29", "3", "4", "17", "9", "5", "6", "26", "8",
-    "30", "10", "11", "27", "12", "13", "14", "15", "16", "18", "19", "20", "21",
-    "22", "37", "28", "23"
-   Team =
-"ANA", "ARI", "BOS", "BUF", "CAR", "CBJ", "CGY", "CHI", "COL", "DAL", "DET", "EDM", "FLA",
-  "L.A", "MIN", "MTL", "N.J", "NSH", "NYI", "NYR", "OTT", "PHI", "PIT", "S.J", "STL", "T.B",
-  "TOR", "VAN", "VGK", "WPG", "WSH"
-"""
 
 NAMES = {
     'n/a': 'n/a', 'ALEXANDER OVECHKIN': 'Alex Ovechkin',

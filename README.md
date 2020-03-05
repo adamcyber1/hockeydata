@@ -1,8 +1,5 @@
 ### hockeydata
 
-#[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-#[![PyPI version](https://badge.fury.io/py/nhlstats.svg)](https://badge.fury.io/py/nhlstats)
-
 A library and CLI tool for collecting live data from NHL games. 
 
 All data is accessible identically through the Python API or command-line tool.
@@ -77,7 +74,7 @@ df = get_season_play_by_play(2017)
 
 ##### Formatters
 
-The formatters package formats data into different types of output, for example CSV, JSON, or a 
+The output package formats the data in a few different formats, for example CSV, JSON, or a 
 text-based table. Each formatter has a `dump` and `dumps` function which work similarly to Python's `json` module. 
 If you want to save your data as JSON, for example:
 

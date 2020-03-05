@@ -1,6 +1,7 @@
 from hockeydata.scrape.common import fix_name, safeget
 from hockeydata.scrape.html_roster import get_roster
 from hockeydata.scrape.json_pbp import get_raw_json
+from hockeydata.constants import TEAM_IDS_REVERSE
 
 
 def get_players(game_id):
@@ -36,9 +37,11 @@ def get_players_json(players_json: dict) -> dict:
     for ID_KEY, player in players_json.items():
         players[player['fullName'].upper()] = {
                                         'id': player['id'],
-                                       'first_name': player['firstName'], 'last_name': player['lastName'],
-                                       'number': player['primaryNumber']
-                                               }
+                                       'first_name': player['firstName'],
+                                        'last_name': player['lastName'],
+                                       'number': player['primaryNumber'],
+                                        'team': TEAM_IDS_REVERSE.get(player['currentTeam']['id'])
+                                        }
 
 
     return players
@@ -59,7 +62,7 @@ def combine_players_lists(json_players, roster_players):
             try:
                 name = fix_name(player)
                 player_id = json_players[name]['id']
-                players[venue][name] = {'id': player_id, 'number': json_players[name]['number'], 'last_name': json_players[name]['last_name']}
+                players[venue][name] = {'id': player_id, 'number': json_players[name]['number'], 'last_name': json_players[name]['last_name'].upper(), 'team': json_players[name]['team']}
             except KeyError:
                 continue
 

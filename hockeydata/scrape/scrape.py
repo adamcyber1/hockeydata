@@ -84,7 +84,7 @@ def get_game_pbp(game_id: str) -> DataFrame:
 
     logger.info("Scraping Game: {}".format(game_id))
     pbp = game_html_pbp(game_id)
-    # pbp = add_event_coordinates(pbp, game_id)
+    pbp = add_event_coordinates(pbp, game_id)
 
     return pbp
 
@@ -168,7 +168,7 @@ def game_html_pbp(game_id: str) -> DataFrame:
     return pbp
 
 
-def game_json_pbp(game_id: str) -> DataFrame:
+def get_json_pbp(game_id: str) -> DataFrame:
     res = json_pbp.scrape_game(game_id)
     return res
 
@@ -182,7 +182,7 @@ def add_event_coordinates(html_pbp: DataFrame, game_id: str):
     result = None
 
     date = get_date(game_id)
-    json_pbp = game_json_pbp(game_id)
+    json_pbp = get_json_pbp(game_id)
     if json_pbp is not None:
         result = merge_html_json_pbp(json_pbp, html_pbp, game_id, date)
 
@@ -202,21 +202,21 @@ def merge_html_json_pbp(json_pbp: DataFrame, html_pbp: DataFrame, game_id: str, 
     :param date:
     :return:
     """
-    json_pbp = json_pbp.drop(['p1_name', 'p2_name', 'p2_ID', 'p3_name', 'p3_ID'], axis=1)
     game_df = DataFrame()
     try:
         # If they aren't equal it's usually due to the HTML containing a challenge event
         if html_pbp.shape[0] == json_pbp.shape[0]:
-            json_pbp = json_pbp[['period', 'event', 'seconds_elapsed', 'xC', 'yC']]
+            json_pbp = json_pbp[['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_ID', 'X_CORD', 'Y_CORD']]
 
-            game_df = pd.merge(html_pbp, json_pbp, left_index=True, right_index=True, how='left')
+            # game_df = pd.merge(html_pbp, json_pbp, left_index=True, right_index=True, how='left')
 
             game_df = pd.merge(html_pbp, json_pbp, left_on=['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1'],
-                               right_on=['period', 'event', 'seconds_elapsed', 'p1_ID'], how='left')
+                               right_on=['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_ID'], how='left')
 
         # This is always done - because merge doesn't work well with shootouts
         game_df = game_df.drop_duplicates(subset=['PERIOD', 'EVENT_TYPE', 'EVENT_DESCRIPTION', 'GAME_SECONDS'])
     except Exception as e:
+        print(str(e))
         return None
 
     return pd.DataFrame(game_df, columns=PBP_COLUMNS_ENHANCED)
