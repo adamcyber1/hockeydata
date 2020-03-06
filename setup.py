@@ -33,7 +33,7 @@ setup(
                       'pandas',
                       'requests',
                       'bs4',
-                      'lxml'],
+                      'lxml',],
     entry_points={  # Optional
         'console_scripts': [
             'hockeydata=hockeydata.cli.__main__:main',

@@ -6,7 +6,12 @@ python:
   - "3.8-dev"  # 3.8 development branch
 # command to install dependencies
 install:
+  - pip install codecov
   - pip install .
 # command to run tests
 script:
   - python -m unittest discover ./tests
+  - coverage
+
+after_success:
+  - codcov
