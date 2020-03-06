@@ -1,4 +1,5 @@
 ### hockeydata
+[![Build Status](https://travis-ci.org/adamfillion/hockeydata.svg?branch=master)](https://travis-ci.org/adamfillion/hockeydata)
 
 A library and CLI tool for collecting live data from NHL games. 
 
