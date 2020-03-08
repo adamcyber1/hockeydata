@@ -58,6 +58,7 @@ def list_games(start: str, end: str) -> DataFrame:
     return scrape.get_games(start, end)
 
 def get_game_infos(*args):
-    pass
+    return scrape.get_game_summaries(list(args))
+
 
 

@@ -9,7 +9,7 @@ from pandas import DataFrame
 from hockeydata.constants import PBP_COLUMNS_ENHANCED
 from hockeydata.scrape.json_schedule import get_date, get_schedule_game_ids
 from hockeydata.scrape.players import get_players
-from hockeydata.scrape import json_shifts, json_pbp, html_pbp
+from hockeydata.scrape import json_shifts, json_pbp, html_pbp, json_boxscore
 
 logger = logging.getLogger('LOG.scrape')
 
@@ -39,7 +39,9 @@ def get_game_summaries(game_ids: list) -> DataFrame:
         return None
 
 def get_game_summary(game_id: str) -> DataFrame:
-    pass
+    game_summary = json_boxscore.scrape_game(game_id)
+
+    return game_summary
 
 
 def get_season_pbp(season: int) -> DataFrame:
@@ -123,9 +125,6 @@ def get_game_shifts(game_id: str) -> DataFrame:
 
     shifts = get_json_shifts(game_id)
 
-    # if shifts == None:
-    #    shifts = get_html_shifts(game_id)
-
     return shifts
 
 def get_games_shifts(game_ids: list) -> DataFrame:
@@ -179,6 +178,14 @@ def get_json_shifts(game_id: str) -> DataFrame:
 
 
 def add_event_coordinates(html_pbp: DataFrame, game_id: str):
+    """
+    Adds coordinates to the HTML pbp using the JSON pbp.
+
+
+    :param html_pbp:
+    :param game_id:
+    :return:
+    """
     result = None
 
     date = get_date(game_id)
@@ -194,29 +201,27 @@ def add_event_coordinates(html_pbp: DataFrame, game_id: str):
 
 def merge_html_json_pbp(json_pbp: DataFrame, html_pbp: DataFrame, game_id: str, date: str) -> DataFrame:
     """
-    Currently probably broken, fix it!
+    Merges pbp data from the JSON source with the HTML source
 
-    :param json_pbp:
-    :param html_pbp:
+    :param json_pbp: JSON pbp Dataframe
+    :param html_pbp: HTML pbp Dataframe
     :param game_id:
     :param date:
     :return:
     """
     game_df = DataFrame()
+
     try:
-        # If they aren't equal it's usually due to the HTML containing a challenge event
-        if html_pbp.shape[0] == json_pbp.shape[0]:
-            json_pbp = json_pbp[['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_ID', 'X_CORD', 'Y_CORD']]
+        json_pbp = json_pbp[['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_ID', 'X_CORD', 'Y_CORD']]
 
-            # game_df = pd.merge(html_pbp, json_pbp, left_index=True, right_index=True, how='left')
+        # game_df = pd.merge(html_pbp, json_pbp, left_index=True, right_index=True, how='left')
 
-            game_df = pd.merge(html_pbp, json_pbp, left_on=['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1'],
-                               right_on=['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_ID'], how='left')
+        game_df = pd.merge(html_pbp, json_pbp, left_on=['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1'],
+                           right_on=['PERIOD', 'EVENT_TYPE', 'GAME_SECONDS', 'EVENT_PLAYER_1_ID'], how='left')
 
         # This is always done - because merge doesn't work well with shootouts
         game_df = game_df.drop_duplicates(subset=['PERIOD', 'EVENT_TYPE', 'EVENT_DESCRIPTION', 'GAME_SECONDS'])
     except Exception as e:
-        print(str(e))
         return None
 
     return pd.DataFrame(game_df, columns=PBP_COLUMNS_ENHANCED)

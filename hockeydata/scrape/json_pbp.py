@@ -10,7 +10,7 @@ from operator import itemgetter
 from hockeydata.constants import NHLAPI
 from hockeydata.scrape.common import fix_team, get_page, to_seconds, fix_name, safeget
 
-#these transformations will be applied to make sure the naming is consistent between this source and the HTML source
+#these transformations are applied to make sure the naming is consistent between this source and the HTML source
 event_types = {
     'PERIOD START': 'PSTR',
     'FACEOFF': 'FAC',

@@ -34,6 +34,9 @@ PBP_COLUMNS = HTML_COLUMNS + ['HOME', 'AWAY', 'GAME_ID', 'DATE', 'HOME_SCORE', '
 # all of the above + data from other sources (i.e. coordinates)
 PBP_COLUMNS_ENHANCED = PBP_COLUMNS + ['X_CORD', 'Y_CORD']
 
+GAME_INFO_COLUMNS = ['GAME_ID', 'GAME_DATE', 'HOME_TEAM_ID', 'HOME_TEAM_FULL_NAME', 'AWAY_TEAM_ID', 'AWAY_TEAM_FULL_NAME',
+             'HOME_GOALS', 'AWAY_GOALS', 'RESULT', 'HOME_SHOTS', 'AWAY_SHOTS']
+
 
 TEAMS = {
     'ANAHEIM DUCKS': 'ANA',

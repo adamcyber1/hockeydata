@@ -26,7 +26,7 @@ python3 ~/dev/hockeydata/setup.py install
 
 This will add a new command to your system, `hockeydata`.
 
-#### What this application is
+#### What this Tool Is
 
 This tool was created out of a need for a reliable data pipeline for NHL live data - something which the NHL 
 *kind of* provides, but not really. Data is scraped from several public sources, checked for errors, and merged when 
@@ -113,7 +113,6 @@ nhl list-plays 2019020406 --output-format csv > 2019020406.csv  # create a new f
 nhl list-plays 2019020406 --output-format csv >> plays.csv  # append result to plays.csv
 ```
 
-
 ##### list-games
 
 ```bash
@@ -125,6 +124,19 @@ Options:
   -o, --output-format [text|csv|json|pretty]
   --help                          Show this message and exit.
 
+```
+
+##### game-info
+
+```bash
+hockeydata game-info --help
+Usage: hockeydata game-info [OPTIONS] [GAME_IDS]...
+
+  Get high-level data about a game
+
+Options:
+  -o, --output-format [text|csv|json|pretty]
+  --help                          Show this message and exit.
 ```
 
 ##### scrape
@@ -209,5 +221,10 @@ using the `pretty` formatter, we get a pretty table:
 | 763 | 2018021000 |        3 | L.A    | MATT ROY         |     8478911 |    1190 |  1200 |         10 |
 +-----+------------+----------+--------+------------------+-------------+---------+-------+------------+
 
-
 ```
+
+#### Acknowledgments
+
+These projects helped greatly with the development of this tool:
+- Dword4's [NHL API Documentation](https://github.com/dword4/nhlapi)
+- Evolving Wild's [R Scraping Applicaiton](https://github.com/evolvingwild/evolving-hockey)
