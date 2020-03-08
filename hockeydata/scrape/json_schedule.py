@@ -3,7 +3,7 @@ This module contains functions to scrape the json schedule for any games or date
 """
 
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from json import loads
 
@@ -50,8 +50,6 @@ def get_dates(games):
     date_from = '-'.join([games[0][:4], '9', '1'])
     year_to = games[-1][:4]
 
-    # If the last game is part of the ongoing season then only request the schedule until that day
-    # We get strange errors if we don't do it like this
     if year_to == get_season(datetime.strftime(datetime.today(), "%Y-%m-%d")):
         date_to = '-'.join([str(datetime.today().year), str(datetime.today().month), str(datetime.today().day)])
     else:

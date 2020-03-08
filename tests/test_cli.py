@@ -5,7 +5,7 @@ from unittest.mock import patch
 import click
 from click.testing import CliRunner
 
-from hockeydata.cli.__main__ import _list_games, _scrape_game
+from hockeydata.cli.__main__ import _list_games, _scrape_game, _game_info
 
 class TestAPI(unittest.TestCase):
     @classmethod
@@ -27,4 +27,11 @@ class TestAPI(unittest.TestCase):
             json_result = self.runner.invoke(_scrape_game, ['--output-format', 'json', self.game_id_1, self.game_id_2])
         except Exception as e:
             self.fail("_list_games() returned unexpected exception: {}".format(str(e)))
+
+    def test_game_info(self):
+        try:
+            text_result = self.runner.invoke(_game_info, [self.game_id_1])
+            json_result = self.runner.invoke(_game_info, ['--output-format', 'json', self.game_id_1, self.game_id_2])
+        except Exception as e:
+            self.fail("_game_info() returned unexpected exception: {}".format(str(e)))
 
