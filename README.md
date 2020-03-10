@@ -227,4 +227,4 @@ using the `pretty` formatter, we get a pretty table:
 
 These projects helped greatly with the development of this tool:
 - Dword4's [NHL API Documentation](https://github.com/dword4/nhlapi)
-- Evolving Wild's [R Scraping Applicaiton](https://github.com/evolvingwild/evolving-hockey)
+- Evolving Wild's [R Scraping Application](https://github.com/evolvingwild/evolving-hockey)
