@@ -5,6 +5,8 @@ A library and CLI tool for collecting live data from NHL games.
 
 All data is accessible identically through the Python API or command-line tool.
 
+**CONTRIBUTIONS ENCOURAGED**
+
 #### Install
 
 Compatible with Python3.5+.
