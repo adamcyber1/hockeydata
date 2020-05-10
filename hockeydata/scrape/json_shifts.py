@@ -65,7 +65,7 @@ def parse_shift(shift: dict) -> dict:
         shift_dict['TEAM'] = fix_team_tricode(shift['teamAbbrev'])
 
         # goal events have an eventDescription, we dont care about those.
-        if shift['eventDescription'] is not 'EVG':
+        if shift['eventDescription'] != 'EVG':
             shift_dict['START'] = common.to_seconds(shift['startTime'])
             shift_dict['END'] = common.to_seconds(shift['endTime'])
             shift_dict['DURATION'] = common.to_seconds(shift['duration'])

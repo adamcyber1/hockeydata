@@ -47,6 +47,7 @@ def get_season_play_by_play(season: int) -> DataFrame:
     """
     return scrape.get_season_pbp(season)
 
+
 def list_games(start: str, end: str) -> DataFrame:
     """
     Get a list of games in the specified time range
@@ -57,8 +58,6 @@ def list_games(start: str, end: str) -> DataFrame:
     """
     return scrape.get_games(start, end)
 
+
 def get_game_infos(*args):
     return scrape.get_game_summaries(list(args))
-
-
-

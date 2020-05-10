@@ -59,9 +59,6 @@ Let's say you want to write a script which you'll run once a day, which will fin
 ```python
 from hockeydata import get_game_shifts, get_season_play_by_play, get_play_by_plays, list_games
 
-# get today's games ids
-game_list = list_games()
-
 # get a full year of games id
 game_list = list_games('2018-01-01', '2019-01-01')
 

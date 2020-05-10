@@ -479,19 +479,3 @@ NAMES = {
     "CAL PETERSEN": "CALVIN PETERSEN",
     "ALEXANDER NYLANDER": "ALEX NYLANDER"
 }
-
-"""
-        player = 
-          case_when(
-            player == "SEBASTIAN.AHO" & position == "D" ~ "SEBASTIAN.AHO2",  ## D, ID 8480222
-            player == "ALEX.PICARD" & position == "L" ~ "ALEX.PICARD2",      ## L, ID 8471221
-            player == "SEAN.COLLINS" & position == "C" ~ "SEAN.COLLINS2",    ## C, ID 8474744
-            player == "COLIN.WHITE" & as.numeric(game_info_data$season) >= 20162017 ~ "COLIN.WHITE2",         ## C, ID 8478400
-            player == "ERIK.GUSTAFSSON" & as.numeric(game_info_data$season) >= 20152016 ~ "ERIK.GUSTAFSSON2", ## D, ID 8476979 (CHI player)
-            
-            player == "ANDREW.MILLER" & season == "20072008" ~ "DREW.MILLER", ## DREW.MILLER 8470778 ID
-            TRUE ~ player
-            )
-        )
-
-"""

@@ -13,6 +13,7 @@ from hockeydata.scrape import json_shifts, json_pbp, html_pbp, json_boxscore
 
 logger = logging.getLogger('LOG.scrape')
 
+
 def get_games(start: str, end: str) -> DataFrame:
     """
     Get the game ids for games that occured in the given time range (inclusive)
@@ -86,9 +87,12 @@ def get_game_pbp(game_id: str) -> DataFrame:
 
     logger.info("Scraping Game: {}".format(game_id))
     pbp = game_html_pbp(game_id)
+    print(pbp)
     pbp = add_event_coordinates(pbp, game_id)
+    print(pbp)
 
     return pbp
+
 
 def get_games_pbp(game_ids: list) -> DataFrame:
     """
@@ -127,6 +131,7 @@ def get_game_shifts(game_id: str) -> DataFrame:
 
     return shifts
 
+
 def get_games_shifts(game_ids: list) -> DataFrame:
     """
     Gets the shifts for list of games and returns a single merged dataframe
@@ -147,7 +152,6 @@ def get_games_shifts(game_ids: list) -> DataFrame:
         return pd.concat(shifts)
     else:
         return None
-
 
 
 def game_html_pbp(game_id: str) -> DataFrame:

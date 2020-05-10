@@ -55,18 +55,18 @@ def parse_html(game_id: str, raw_events: list, players: dict, teams: dict) -> Da
 
     :return: DataFrame with info
     """
-    home = safeget(teams, 'Home')
-    away = safeget(teams, 'Away')
+    home = safeget(teams, 'HOME')
+    away = safeget(teams, 'AWAY')
 
     dataframe = DataFrame(columns=HTML_COLUMNS)
 
     # each event gets converted to a series then appended to the Dataframe
-    for event2 in raw_events:
-        if not valid_event(event2):
+    for event in raw_events:
+        if not valid_event(event):
             continue
 
         # the only state required to parse an event is the players + teams
-        series = pd.Series(parse_event(event2, players, home, away), index=HTML_COLUMNS)
+        series = pd.Series(parse_event(event, players, home, away), index=HTML_COLUMNS)
 
         dataframe = dataframe.append(series, ignore_index=True)
 
@@ -74,8 +74,8 @@ def parse_html(game_id: str, raw_events: list, players: dict, teams: dict) -> Da
     # post processing, this is where we add stuff that isn't directly parse-able from the html. i.e. scores, classifying
     # events as fenwick/corsi etc..
     # add some columns to our dataframe that we dont directly get from the HTML
-    dataframe['AWAY_TEAM'] = away
-    dataframe['HOME_TEAM'] = home
+    dataframe['AWAY'] = away
+    dataframe['HOME'] = home
     dataframe['GAME_ID'] = game_id
     dataframe['DATE'] = get_date(game_id)
     return dataframe

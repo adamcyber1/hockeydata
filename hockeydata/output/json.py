@@ -7,3 +7,6 @@ def dump(plays, fobj):
 
 def dumps(plays: DataFrame):
     return plays.to_json(orient='records')
+
+def to_dict(plays: DataFrame):
+    return plays.to_dict(orient='records')
