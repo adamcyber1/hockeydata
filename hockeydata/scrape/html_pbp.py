@@ -301,13 +301,6 @@ def get_player_id(jersey: tuple, players: dict) -> str:
                 (player['team'] == jersey[0] or jersey[0] == '') and \
                 (player['last_name'].upper() == jersey[2] or  jersey[2] == ''):
                 return player['id']
-
-
-
-    print(jersey)
-
-
-
     pass
 
 

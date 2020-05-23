@@ -38,9 +38,5 @@ class TestAPI(unittest.TestCase):
         except Exception as e:
             self.fail("api.list_games() returned unexpected exception: {}".format(str(e)))
 
-
-
-
-
 if __name__ == '__main__':
     unittest.main()

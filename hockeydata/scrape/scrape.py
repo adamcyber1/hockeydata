@@ -87,10 +87,7 @@ def get_game_pbp(game_id: str) -> DataFrame:
 
     logger.info("Scraping Game: {}".format(game_id))
     pbp = game_html_pbp(game_id)
-    print(pbp)
     pbp = add_event_coordinates(pbp, game_id)
-    print(pbp)
-
     return pbp
 
 
