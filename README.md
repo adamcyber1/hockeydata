@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="img/logo.svg">
+</div>
+
 ### hockeydata
 [![Build Status](https://travis-ci.org/adamfillion/hockeydata.svg?branch=master)](https://travis-ci.org/adamfillion/hockeydata) [![PyPI version fury.io](https://badge.fury.io/py/hockeydata.svg)](https://pypi.python.org/pypi/hockeydata/)
 [![PyPI status](https://img.shields.io/pypi/status/hockeydata.svg)](https://pypi.python.org/pypi/hockeydata/)
