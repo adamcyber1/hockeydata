@@ -1,5 +1,11 @@
 ### hockeydata
-[![Build Status](https://travis-ci.org/adamfillion/hockeydata.svg?branch=master)](https://travis-ci.org/adamfillion/hockeydata)
+[![Build Status](https://travis-ci.org/adamfillion/hockeydata.svg?branch=master)](https://travis-ci.org/adamfillion/hockeydata) [![PyPI version fury.io](https://badge.fury.io/py/hockeydata.svg)](https://pypi.python.org/pypi/hockeydata/)
+[![PyPI status](https://img.shields.io/pypi/status/hockeydata.svg)](https://pypi.python.org/pypi/hockeydata/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![Downloads](https://pepy.tech/badge/hockeydata)](https://pepy.tech/project/hockeydata)
+[![Downloads](https://pepy.tech/badge/hockeydata/week)](https://pepy.tech/project/hockeydata/week)
+
 
 A library and CLI tool for collecting live data from NHL games. 
 
