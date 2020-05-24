@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="img/logo.svg">
+  <img src="img/logo.svg" height="200">
 </div>
 
 ### hockeydata
