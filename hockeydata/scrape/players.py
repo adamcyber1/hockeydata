@@ -40,7 +40,7 @@ def get_players_json(players_json: dict) -> dict:
                                        'first_name': player['firstName'],
                                         'last_name': player['lastName'],
                                        'number': player['primaryNumber'],
-                                        'team': TEAM_IDS_REVERSE.get(player['currentTeam']['id'])
+                                        'team': safeget(TEAM_IDS_REVERSE, 'currentTeam', 'id')
                                         }
 
 
