@@ -115,8 +115,8 @@ PART_TEAMS = {
 }
 
 TEAM_IDS = {
-    "N.J": 1, "NYI": 2, "NYR": 3, "PHI": 4, "PIT": 5, "BOS": 6, "BUF": 7, "MTL": 8, "OTT": 9, "TOR": 10, "ATL": 11, "CAR": 12, "FLA": 13, "T.B": 14,
-    "WSH": 15, "CHI": 16, "DET": 17, "NSH": 18, "STL": 19, "CGY": 20, "COL": 21, "EDM": 22, "VAN": 23, "ANA": 24, "DAL": 25, "L.A": 26, "S.J": 28,
+    "N.J": 1, "NYI": 2, "NYR": 3, "PHI": 4, "PIT": 5, "BOS": 6, "BUF": 7, "MTL": 8, "OTT": 9, "TOR": 10, "ATL": 11, "CAR": 12, "FLA": 13, "T.B": 14, "T.B.": 14,
+    "WSH": 15, "CHI": 16, "DET": 17, "NSH": 18, "STL": 19, "CGY": 20, "COL": 21, "EDM": 22, "VAN": 23, "ANA": 24, "DAL": 25, "L.A": 26, "L.A.": 26, "S.J": 28, "S.J.": 28,
     "CBJ": 29, "MIN": 30, "WPG": 52, "ARI": 53, "VGK": 54
 }
 # "ARI": 27, PHEONIX...
