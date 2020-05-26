@@ -6,7 +6,6 @@ from enum import Enum
 from pandas import DataFrame
 
 
-
 def check_season(ctx, param, value: str):
     match = re.match(r"^\d{4}$|^\d{8}$|^\d{4}-\d{4}$")
     if match is None:

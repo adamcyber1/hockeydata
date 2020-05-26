@@ -182,7 +182,6 @@ def add_event_coordinates(html_pbp: DataFrame, game_id: str):
     """
     Adds coordinates to the HTML pbp using the JSON pbp.
 
-
     :param html_pbp:
     :param game_id:
     :return:

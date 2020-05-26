@@ -2,6 +2,7 @@ import pandas as pd
 import unittest
 
 import hockeydata.scrape.html_pbp as html_pbp
+from hockeydata.scrape.scrape import game_html_pbp
 
 #TODO get can actual example with an expected output
 
@@ -23,8 +24,14 @@ class TestHTMLPBP(unittest.TestCase):
         except Exception as e:
             self.fail("get_raw_html()+clean_html() returned unexpected exception: {}".format(str(e)))
 
+    def test_parse_pbp(self):
+        try:
+            pbp = game_html_pbp(game_id=self.game_id)
+
+        except Exception as e:
+            self.fail(str(e))
+
     def test_event_parsing(self):
-        home = ''
         players = {'Home': {'DION PHANEUF': {'id': 8470602, 'number': '3', 'last_name': 'Phaneuf', 'team': 'L.A'},
                             'DREW DOUGHTY': {'id': 8474563, 'number': '8', 'last_name': 'Doughty', 'team': 'L.A'},
                             'ADRIAN KEMPE': {'id': 8477960, 'number': '9', 'last_name': 'Kempe', 'team': 'L.A'},
@@ -94,6 +101,9 @@ class TestHTMLPBP(unittest.TestCase):
         self.assertEqual(player_2, None) # none
         self.assertEqual(player_3, None) # none
 
+        # TODO
+        description = "CHI TEAM Too many men/ice - bench(2 min) Served By: #95 SIKURA, Neu. Zone"
+
         """
         description = "BOS won Off. Zone - N.J #19 ZAJAC vs BOS #55 ACCIARI"
         player_1 = html_pbp.get_event_player_1(description, 'FAC', 'CHI', players)
@@ -103,3 +113,4 @@ class TestHTMLPBP(unittest.TestCase):
         self.assertEqual(player_2, None) # none
         self.assertEqual(player_3, None) # none
         """
+

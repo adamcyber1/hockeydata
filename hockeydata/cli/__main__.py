@@ -55,5 +55,3 @@ def _game_info(output_format: OutputFormat, game_ids):
 @click.argument('game_ids', nargs=-1)
 def _scrape_game(output_format: OutputFormat, game_ids):
     output_format.echo(get_game_shifts(*game_ids))
-
-

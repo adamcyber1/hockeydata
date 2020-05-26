@@ -66,7 +66,7 @@ def remove_captaincy(player: list):
 
     :return:
     """
-    player = re.sub('\(A\)|\(C\)', '', player[2])
+    player = re.sub('\(A\)|\(C\)', '', player)
 
     return player
 
@@ -101,12 +101,17 @@ def get_players(soup: BeautifulSoup) -> dict:
         players['Home'] += player_info[3]
 
     # First condition is to control when we get whitespace as one of the indices
-    players['Away'] = [remove_captaincy(i) if i[0] != u'\xa0' else i for i in players['Away']]
-    players['Home'] = [remove_captaincy(i) if i[0] != u'\xa0' else i for i in players['Home']]
 
-    # Filter out whitespace
-    players['Away'] = [i for i in players['Away'] if i[0] != u'\xa0']
-    players['Home'] = [i for i in players['Home'] if i[0] != u'\xa0']
+    players['Away'] = [i[:3] for i in players['Away']]
+    players['Home'] = [i[:3] for i in players['Home']]
+
+    for player in players['Away']:
+        player[2] = remove_captaincy(player[2])
+        player[2].strip(u'\xa0')
+
+    for player in players['Home']:
+        player[2] = remove_captaincy(player[2])
+        player[2].strip(u'\xa0')
 
     return players
 

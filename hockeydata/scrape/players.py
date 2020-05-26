@@ -61,9 +61,9 @@ def combine_players_lists(json_players, roster_players):
     for venue in players.keys():
         for player in roster_players[venue]:
             try:
-                name = fix_name(player)
+                name = fix_name(player[2])
                 player_id = json_players[name]['id']
-                players[venue][name] = {'id': player_id, 'number': json_players[name]['number'],
+                players[venue][name] = {'id': player_id, 'number': player[0],
                                         'last_name': json_players[name]['last_name'].upper(),
                                         'team': json_players[name]['team']}
             except KeyError:
