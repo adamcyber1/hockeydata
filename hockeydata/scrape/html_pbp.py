@@ -219,7 +219,7 @@ def parse_event(event, players, home, away) -> pd.Series:
 
     home_players = event[7]
     for i in range(1, len(home_players) + 1):
-        player =  players['Home'].get(home_players[i - 1][0])
+        player = players['Home'].get(home_players[i - 1][0])
         if player is not None:
             series['HOME_ON_{}'.format(i)] = player.get('id')
 
@@ -295,11 +295,16 @@ def get_player_id(jersey: tuple, players: dict) -> str:
     :param players:
     :return:
     """
+    # TODO
+    # (player['team'] == jersey[0] or jersey[0] == '')
+    # the above conditional was breaking things because the JSON player data has innacurate
+    # team data, it uses the players current team (as in present day team) as opposed
+    # to their team when they were actually playing the game... annoying.
+    # means I likely need to get their team from the HTML data
     for _, venue in players.items():
         for _, player in venue.items():
             if (player['number'] == jersey[1] or jersey[1] == '') and \
-                (player['team'] == jersey[0] or jersey[0] == '') and \
-                (player['last_name'].upper() == jersey[2] or  jersey[2] == ''):
+                    (player['last_name'].upper() == jersey[2] or jersey[2] == ''):
                 return player['id']
     pass
 

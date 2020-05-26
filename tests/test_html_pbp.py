@@ -93,3 +93,13 @@ class TestHTMLPBP(unittest.TestCase):
         self.assertEqual(player_1, 8478440) # STROME
         self.assertEqual(player_2, None) # none
         self.assertEqual(player_3, None) # none
+
+        """
+        description = "BOS won Off. Zone - N.J #19 ZAJAC vs BOS #55 ACCIARI"
+        player_1 = html_pbp.get_event_player_1(description, 'FAC', 'CHI', players)
+        player_2 = html_pbp.get_event_player_2(description, 'SHOT', players)
+        player_3 = html_pbp.get_event_player_3(description, 'SHOT', players)
+        self.assertEqual(player_1, 8478440) # STROME
+        self.assertEqual(player_2, None) # none
+        self.assertEqual(player_3, None) # none
+        """

@@ -35,12 +35,13 @@ def get_players_json(players_json: dict) -> dict:
     players = dict()
 
     for ID_KEY, player in players_json.items():
+        team_tri = safeget(player, 'currentTeam', 'id')
         players[player['fullName'].upper()] = {
                                         'id': player['id'],
                                        'first_name': player['firstName'],
                                         'last_name': player['lastName'],
                                        'number': player['primaryNumber'],
-                                        'team': safeget(TEAM_IDS_REVERSE, 'currentTeam', 'id')
+                                        'team': safeget(TEAM_IDS_REVERSE, team_tri)
                                         }
 
 

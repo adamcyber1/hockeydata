@@ -2,7 +2,7 @@
   <img src="img/logo.png" height="200">
 </div>
 
-### hockeydata
+# hockeydata
 #### Power your Analytics
 [![Build Status](https://travis-ci.org/adamfillion/hockeydata.svg?branch=master)](https://travis-ci.org/adamfillion/hockeydata) [![PyPI version fury.io](https://badge.fury.io/py/hockeydata.svg)](https://pypi.python.org/pypi/hockeydata/)
 [![PyPI status](https://img.shields.io/pypi/status/hockeydata.svg)](https://pypi.python.org/pypi/hockeydata/)
@@ -17,6 +17,16 @@ A library and CLI tool for collecting live data from NHL games.
 All data is accessible identically through the Python API or command-line tool.
 
 **CONTRIBUTIONS ENCOURAGED**
+
+#### Features
+
+- Generate enriched play by play data for NHL games. This includes all players on the ice,
+the coordinates of the event, the game state, as well as standard metadata.
+- Generate shift data for NHL games.
+- Create game ID lists for schedule ranges
+- Live game scraping (in development)
+
+
 
 #### Install
 
